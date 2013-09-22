@@ -1,0 +1,25 @@
+<%= link_to 'New Task', new_task_path ,:id => 'new_link', :remote => true %>
+
+<%= form_tag complete_tasks_path , :method => 'put' do %>
+<h3>Incomplete Tasks</h3>
+<div id='incomplete_task'>
+  <% @tasks.each do |task| %>
+   <%= check_box_tag "task_ids[]" , task.id %>
+   <%= submit_tag 'Update' %>
+   <%= task.name %>       <%= link_to "(remove)" , task_path(task), :method => :delete ,:confirm => 'Are you sure?'  %><br/>
+  <% end %>
+<% end %>
+</div>
+
+<br />
+
+<h3>Complete Tasks</h3>
+<% @completedtasks.each do |ct| %>
+ <%= check_box_tag "task_ids[]" , ct.id , true %>
+ <%= submit_tag 'Update' %>
+ <strike><%= ct.name %></strike>  <%= link_to "(remove)" , task_path(ct), :method => :delete ,:confirm => 'Are you sure?' %>
+
+ <% end %>
+
+
+
